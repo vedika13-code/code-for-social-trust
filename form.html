@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code for Social Trust | IEEE-WIE</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fa;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #3b3b98;
+    }
+
+    #qr {
+      margin: 30px auto;
+      width: 220px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      text-align: left;
+      white-space: pre-line;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      background-color: #3b3b98;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Code for Social Trust<br><small>IEEE – Women in Engineering</small></h2>
+
+<!-- DESKTOP VIEW -->
+<div id="desktopView">
+  <p><b>Scan this QR code to participate</b></p>
+  <div id="qr"></div>
+</div>
+
+<!-- MOBILE VIEW -->
+<div id="mobileView" style="display:none;">
+  <p>Select your Team Number</p>
+  <select id="teamNumber">
+    <option value="">-- Select Team --</option>
+    <option value="1">Team 1</option>
+    <option value="2">Team 2</option>
+    <option value="3">Team 3</option>
+    <option value="4">Team 4</option>
+    <option value="5">Team 5</option>
+  </select>
+  <br>
+  <button onclick="showCard()">View Card</button>
+
+  <div id="output"></div>
+</div>
+
+<script>
+  // 📱 Detect mobile vs desktop
+  if (window.innerWidth <= 768) {
+    document.getElementById("desktopView").style.display = "none";
+    document.getElementById("mobileView").style.display = "block";
+  } else {
+    new QRCode(document.getElementById("qr"), {
+      text: window.location.href,
+      width: 220,
+      height: 220
+    });
+  }
+
+  function showCard() {
+    const team = document.getElementById("teamNumber").value;
+    let text = "";
+
+    switch (team) {
+      case "1":
+        text = `CARD 1 – Rural Self-Help Group (Meera)
+        TEAM 1: Rural Self-Help Group Member
+ * Logic Theme: Approval Verification
+ * Prompt: Write a program that accepts a funding request and marks it as approved only if it is 
+ verified by at least two independent verifiers. Once approved, the decision must not be changed.
+ * What judges look for: Clear conditions, Preventing silent changes, Simple but correct logic.`;
+        break;
+
+      case "2":
+        text = `CARD 2 – College Student Scholarship (Aisha)
+        TEAM 2: College Student Scholarship System
+ * Logic Theme: Fair Selection Rule
+ * Prompt: Write a program that processes scholarship applications and selects 
+ candidates based on fixed criteria (for example, marks and income). The program must ensure 
+ that criteria weights are predefined and cannot be modified after selection begins.
+ * What judges look for: Fixed rules, No manual override, Transparent decision logic.`;
+        break;
+
+      case "3":
+        text = `CARD 3 – Woman Entrepreneur Micro-Loans (Lakshmi)
+
+TEAM 3: Woman Entrepreneur Micro-Loan Platform
+ * Logic Theme: Access Control
+ * Prompt: Write a program that allows only authorized verifiers to approve or reject loan 
+ applications. Any attempt by unauthorized users must be rejected and recorded.
+ * What judges look for: Role checks, Clear permission logic, Handling invalid access.`;
+        break;
+
+      case "4":
+        text = `CARD 4 – Factory Worker Reporting Issues (Rekha)
+
+TEAM 4: Workplace Issue Reporting System
+ * Logic Theme: Privacy-Preserving Status Tracking
+ * Prompt: Write a program where a complaint can be submitted anonymously. 
+ The system should allow the complainant to check the status of the complaint without revealing 
+ their identity.
+ * What judges look for: Separation of identity and status, Safe tracking logic, Clear data handling.`;
+        break;
+
+      case "5":
+        text = `CARD 5 – Homemaker Welfare Access (Savitri)
+
+TEAM 5: Welfare Benefit Application System
+ * Logic Theme: Application Status Transparency
+ * Prompt: Write a program that tracks the status of welfare applications
+(submitted, verified, approved, rejected). 
+Status updates must follow a fixed order and cannot be skipped.
+ * What judges look for: State transitions, Preventing misuse, Logical flow.`;
+        break;
+
+      default:
+        text = "❌ Please select a team number.";
+    }
+
+    document.getElementById("output").innerHTML =
+      `<div class="card">${text}</div>`;
+  }
+</script>
+
+</body>
+</html>
